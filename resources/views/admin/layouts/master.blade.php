@@ -35,7 +35,7 @@
     </div>
 
     {{-- jQuery --}}
-
+    <script src="{{ asset('backend/js/jquery.min.js') }}"></script>
     {{-- Bootstrap JS --}}
     <script src="{{ asset('backend/js/bootstrap.bundle.min.js') }}"></script>
 

@@ -13,7 +13,7 @@ Auth::routes();
 
 Route::group([
     'prefix'     => 'admin',
-    // 'middleware' => 'auth',
+    'middleware' => 'auth',
 ], function () {
     Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
 });
