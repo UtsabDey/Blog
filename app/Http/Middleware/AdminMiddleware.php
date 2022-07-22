@@ -8,22 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
+
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->role_as == 1) { // 1 = Admin & 0 = User
+            if (Auth::user()->role_as == '1') { // 1 = Admin & 0 = User
                 return $next($request);
             } else {
-                return redirect('login')->with('warning', 'You are not allowed to login to this website');
+                return redirect('home')->with('status', 'Access Denied! As you are not Admin');
             }
-
+        }
+        else{
+            return redirect('login');
         }
 
     }

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
-class DashboardController extends Controller
+class CategoryController extends Controller
 {
     public function __construct()
     {
@@ -14,7 +15,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');
+        return view('admin.category.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(),[
+            'name' => 'required|string|max:200',
+            'description' => 'required',
+            'meta_title' => 'required|string|max:200',
+            'meta_description' => 'required|string',
+            'meta_keyword' => 'required|string',
+            'navbar_status' => 'required|boolean',
+            'status' => 'required|boolean',
+        ]);
     }
 
     /**
