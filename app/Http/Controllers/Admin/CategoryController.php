@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
@@ -42,9 +44,33 @@ class CategoryController extends Controller
             'meta_title' => 'required|string|max:200',
             'meta_description' => 'required|string',
             'meta_keyword' => 'required|string',
-            'navbar_status' => 'required|boolean',
-            'status' => 'required|boolean',
+            'navbar_status' => 'nullable|boolean',
+            'status' => 'nullable|boolean',
         ]);
+
+        if($validate->fails()){ 
+            return back()->withErrors($validate)->withInput();
+        }
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug  = $request->slug;
+        $category->description = $request->description;
+        if ($request->hasFile('image')) {
+            $photo = $request->file('image');
+            $photo_name = time(). '.' .$photo->getClientOriginalExtension();
+            $photo->move('images/category' , $photo_name);
+            $category->image = $photo_name;
+        }
+        $category->meta_title = $request->meta_title;
+        $category->meta_description = $request->meta_description;
+        $category->meta_keyword = $request->meta_keyword;
+        $category->navbar_status = $request->navbar_status == true ? '1':'0';
+        $category->status = $request->status == true ? '1':'0';
+        $category->created_by = Auth::user()->id;
+        $category->save();
+
+        return redirect()->route('category.index')->with('success', 'Category added successfully');
     }
 
     /**
