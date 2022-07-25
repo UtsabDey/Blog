@@ -1,11 +1,11 @@
 @extends('admin.layouts.master')
-@section('title', 'Add Category')
+@section('title', 'Edit Category')
 @section('content')
     <div class="container-fluid px-4">
         <div class="row justify-content-center mb-5">
             <div class="col-sm-8">
                 <div class="card mt-4 shadow">
-                    <h5 class="card-header">Add Category</h5>
+                    <h5 class="card-header">Edit Category</h5>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             @foreach ($errors->all() as $error)
@@ -14,11 +14,12 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('category.update', $category->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="mb-3">
                                 <label for="">Category Name</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}"
+                                <input type="text" class="form-control" name="name" value="{{ $category->name }}"
                                     placeholder="Category Name" required>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -28,7 +29,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="">Slug</label>
-                                <input type="text" class="form-control" name="slug" value="{{ old('slug') }}"
+                                <input type="text" class="form-control" name="slug" value="{{ $category->slug }}"
                                     placeholder="Slug">
                                 @error('slug')
                                     <span class="invalid-feedback" role="alert">
@@ -38,7 +39,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="">Description</label>
-                                <textarea class="form-control" name="description" rows="3" required></textarea>
+                                <textarea class="form-control" name="description" rows="3" required>{{ $category->description }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -57,7 +58,7 @@
                             <h6>SEO Tags</h6>
                             <div class="mb-3">
                                 <label for="">Meta title</label>
-                                <input type="text" class="form-control" name="meta_title" value="{{ old('meta_title') }}"
+                                <input type="text" class="form-control" name="meta_title" value="{{ $category->meta_title }}"
                                     placeholder="Meta title" required>
                                 @error('meta_title')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +69,7 @@
                             <div class="mb-3">
                                 <label for="">Meta Description</label>
                                 <input type="text" class="form-control" name="meta_description"
-                                    value="{{ old('meta_description') }}" placeholder="Meta Description" required>
+                                    value="{{ $category->meta_description }}" placeholder="Meta Description" required>
                                 @error('meta_description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -78,7 +79,7 @@
                             <div class="mb-3">
                                 <label for="">Meta Keyword</label>
                                 <input type="text" class="form-control" name="meta_keyword"
-                                    value="{{ old('meta_keyword') }}" placeholder="Meta Keyword">
+                                    value="{{ $category->meta_keyword }}" placeholder="Meta Keyword">
                                 @error('meta_keyword')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -89,15 +90,15 @@
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="">Navbar Status</label>
-                                    <input type="checkbox" name="navbar_status">
+                                    <input type="checkbox" name="navbar_status" {{ $category->navbar_status == '1' ? 'checked' : ''}}>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="">Status</label>
-                                    <input type="checkbox" name="status">
+                                    <input type="checkbox" name="status" {{ $category->status == '1' ? 'checked' : ''}}>
                                 </div>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary float-end"><i
-                                            class="fas fa-save me-2"></i>Save</button>
+                                            class="fas fa-save me-2"></i>Update</button>
                                 </div>
                             </div>
                         </form>
