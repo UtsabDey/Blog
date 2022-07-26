@@ -19,5 +19,5 @@ Route::group([
 ], function () {
     Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
     Route::resource('category', CategoryController::class);
-    Route::resource('post', PostController::class);
+    Route::resource('posts', PostController::class);
 });

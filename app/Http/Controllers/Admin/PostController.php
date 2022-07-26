@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post.create');
     }
 
     /**
@@ -35,7 +36,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:200',
+            'description' => 'required',
+            // 'meta_title' => 'required|string|max:200',
+            // 'meta_description' => 'required|string',
+            // 'meta_keyword' => 'required|string',
+            // 'navbar_status' => 'nullable',
+            // 'status' => 'nullable',
+        ]);
+
+        if ($validate->fails()) {
+            return back()->withErrors($validate)->withInput();
+        }
     }
 
     /**

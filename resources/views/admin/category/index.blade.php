@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Category')
+@section('title', 'View Category')
 @section('content')
     <div class="container-fluid px-4">
         <div class="row justify-content-center mb-5">
