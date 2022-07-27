@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="{{ asset('backend/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/datatable.css') }}">
 
+    {{-- Summernote CSS --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    {{-- <link href="{{ asset('backend/css/summernote.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('backend/css/summernote-lite.min.css') }}" rel="stylesheet">
+
     {{-- Font Awesome --}}
     <script src="{{ asset('backend/fontawesome/v6.1.0/all.js') }}"></script>
 
@@ -42,6 +47,10 @@
     {{-- Main JS --}}
     <script src="{{ asset('backend/js/scripts.js') }}"></script>
 
+    {{-- Summernote JS --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
+    <script src="{{ asset('backend/js/summernote-lite.min.js') }}"></script>
+
     <script src="{{ asset('backend/js/chart.min.js') }}"></script>
     <script src="{{ asset('backend/js/chart-area-demo.js') }}"></script>
     <script src="{{ asset('backend/js/chart-bar-demo.js') }}"></script>
@@ -50,6 +59,15 @@
 
     {{-- Toastr JS --}}
     <script src="{{ asset('backend/toastr/toastr.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#mySummernote").summernote({
+                height: 120,
+            });
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
 
     <script>
         @if (Session::has('success'))

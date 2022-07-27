@@ -39,7 +39,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="">Description</label>
-                                <textarea class="form-control" name="description" rows="3" required>{{ $category->description }}</textarea>
+                                <textarea class="form-control" name="description" id="mySummernote" required>{{ $category->description }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
