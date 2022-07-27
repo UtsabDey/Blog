@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -15,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.post.index');
+        $data['posts'] = Post::all();
+        return view('admin.post.index', $data)->with('no', 1);
     }
 
     /**
@@ -25,30 +29,42 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        $data['category'] = Category::where('status', '0')->orderBy('name', 'ASC')->get();
+        return view('admin.post.create', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
+            'category_id' => 'required|integer',
             'name' => 'required|string|max:200',
             'description' => 'required',
-            // 'meta_title' => 'required|string|max:200',
-            // 'meta_description' => 'required|string',
-            // 'meta_keyword' => 'required|string',
-            // 'navbar_status' => 'nullable',
-            // 'status' => 'nullable',
+            'yt_iframe' => 'nullable|string',
+            'meta_title' => 'required|string|max:200',
+            'meta_description' => 'required|string',
+            'meta_keyword' => 'required|string',
+            'navbar_status' => 'nullable',
+            'status' => 'nullable',
         ]);
 
         if ($validate->fails()) {
             return back()->withErrors($validate)->withInput();
         }
+
+        $post = new Post();
+        $post->category_id = $request->category_id;
+        $post->name = $request->name;
+        $post->slug = $request->slug;
+        $post->description = $request->description;
+        $post->yt_iframe = $request->yt_iframe;
+        $post->meta_title = $request->meta_title;
+        $post->meta_description = $request->meta_description;
+        $post->meta_keyword = $request->meta_keyword;
+        $post->status = $request->status == true ? '1' : '0';
+        $post->created_by = Auth::user()->id;
+        $post->save();
+
+        return redirect()->route('posts.index')->with('success', 'Post added successfully');
     }
 
     /**
@@ -62,27 +78,47 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data['post'] = Post::find($id);
+        return view('admin.post.edit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'category_id' => 'required|integer',
+            'name' => 'required|string|max:200',
+            'description' => 'required',
+            'yt_iframe' => 'nullable|string',
+            'meta_title' => 'required|string|max:200',
+            'meta_description' => 'required|string',
+            'meta_keyword' => 'required|string',
+            'navbar_status' => 'nullable',
+            'status' => 'nullable',
+        ]);
+
+        if ($validate->fails()) {
+            return back()->withErrors($validate)->withInput();
+        }
+
+        $post = Post::find($id);
+        $post->category_id = $request->category_id;
+        $post->name = $request->name;
+        $post->slug = $request->slug;
+        $post->description = $request->description;
+        $post->yt_iframe = $request->yt_iframe;
+        $post->meta_title = $request->meta_title;
+        $post->meta_description = $request->meta_description;
+        $post->meta_keyword = $request->meta_keyword;
+        $post->status = $request->status == true ? '1' : '0';
+        $post->created_by = Auth::user()->id;
+
+        if ($post->isDirty()) {
+            $post->update();
+            return redirect()->route('posts.index')->with('success', 'Post updated successfully');
+        }
+        return back()->with('error', 'Nothing Changed !!');
     }
 
     /**
@@ -93,6 +129,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+        return redirect()->back()->with('warning', 'Post Deleted Successfully');
     }
 }

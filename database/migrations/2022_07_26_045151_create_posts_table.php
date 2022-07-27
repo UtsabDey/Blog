@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
 
             $table->string('yt_iframe')->nullable();
             $table->string('meta_title');
-            $table->mediumText('meta_description');
+            $table->mediumText('meta_description')->nullable();
             $table->mediumText('meta_keyword')->nullable();
             $table->tinyInteger('status')->default('0');
             $table->integer('created_by');
