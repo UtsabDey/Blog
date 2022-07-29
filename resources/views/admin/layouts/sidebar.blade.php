@@ -3,7 +3,7 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading"></div>
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
@@ -44,6 +44,12 @@
                             href="{{ route('posts.index') }}">View Post</a>
                     </nav>
                 </div>
+
+                {{-- Users --}}
+                <a class="nav-link {{ Route::is('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                    Users
+                </a>
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                     aria-expanded="false" aria-controls="collapsePages">

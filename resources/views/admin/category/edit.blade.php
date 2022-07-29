@@ -5,7 +5,8 @@
         <div class="row justify-content-center mb-5">
             <div class="col-sm-8">
                 <div class="card mt-4 shadow">
-                    <h5 class="card-header">Edit Category</h5>
+                    <h5 class="card-header">Edit Category <a href="{{ route('category.index') }}"
+                            class="btn btn-danger btn-sm float-end"><i class="fa-solid fa-arrow-left me-2"></i></i>Back</a></h5>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             @foreach ($errors->all() as $error)
@@ -14,7 +15,8 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form action="{{ route('category.update', $category->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('category.update', $category->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -58,8 +60,8 @@
                             <h6>SEO Tags</h6>
                             <div class="mb-3">
                                 <label for="">Meta title</label>
-                                <input type="text" class="form-control" name="meta_title" value="{{ $category->meta_title }}"
-                                    placeholder="Meta title" required>
+                                <input type="text" class="form-control" name="meta_title"
+                                    value="{{ $category->meta_title }}" placeholder="Meta title" required>
                                 @error('meta_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -90,11 +92,12 @@
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="">Navbar Status</label>
-                                    <input type="checkbox" name="navbar_status" {{ $category->navbar_status == '1' ? 'checked' : ''}}>
+                                    <input type="checkbox" name="navbar_status"
+                                        {{ $category->navbar_status == '1' ? 'checked' : '' }}>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="">Status</label>
-                                    <input type="checkbox" name="status" {{ $category->status == '1' ? 'checked' : ''}}>
+                                    <input type="checkbox" name="status" {{ $category->status == '1' ? 'checked' : '' }}>
                                 </div>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary float-end"><i

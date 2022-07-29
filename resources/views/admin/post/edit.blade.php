@@ -8,6 +8,8 @@
                     <div class="card-header">
                         <h4>
                             Edit Post
+                            <a href="{{ route('posts.index') }}" class="btn btn-danger btn-sm float-end"><i
+                                    class="fa-solid fa-arrow-left me-2"></i></i>Back</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -57,8 +59,8 @@
                             <h6>SEO Tags</h6>
                             <div class="mb-3">
                                 <label for="">Meta title</label>
-                                <input type="text" class="form-control" name="meta_title" value="{{ $post->meta_title }}"
-                                    placeholder="Meta title" required>
+                                <input type="text" class="form-control" name="meta_title"
+                                    value="{{ $post->meta_title }}" placeholder="Meta title" required>
                                 @error('meta_title')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
