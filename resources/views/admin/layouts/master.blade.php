@@ -11,7 +11,11 @@
 
     {{-- Main CSS --}}
     <link rel="stylesheet" href="{{ asset('backend/css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/css/datatable.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('backend/css/datatable.css') }}"> --}}
+
+    {{-- DataTable CSS --}}
+    <link rel="stylesheet" href="{{ asset('backend/css/dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/css/bootstrap5.min.css') }}">
 
     {{-- Summernote CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -23,6 +27,16 @@
 
     {{-- Toastr CSS --}}
     <link rel="stylesheet" href="{{ asset('backend/toastr/toastr.css') }}">
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            margin: 0px !important;
+            padding: 0px !important;
+        }
+
+        div.dataTables_wrapper div.dataTables_length select {
+            width: 50% !important;
+        }
+    </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -47,6 +61,10 @@
     {{-- Main JS --}}
     <script src="{{ asset('backend/js/scripts.js') }}"></script>
 
+    {{-- DataTable CSS --}}
+    <script src="{{ asset('backend/js/dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/js/bootstrap5.min.js') }}"></script>
+
     {{-- Summernote JS --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
     <script src="{{ asset('backend/js/summernote-lite.min.js') }}"></script>
@@ -54,11 +72,16 @@
     <script src="{{ asset('backend/js/chart.min.js') }}"></script>
     <script src="{{ asset('backend/js/chart-area-demo.js') }}"></script>
     <script src="{{ asset('backend/js/chart-bar-demo.js') }}"></script>
-    <script src="{{ asset('backend/js/simple-datatables.js') }}"></script>
-    <script src="{{ asset('backend/js/datatables-simple-demo.js') }}"></script>
+
 
     {{-- Toastr JS --}}
     <script src="{{ asset('backend/toastr/toastr.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

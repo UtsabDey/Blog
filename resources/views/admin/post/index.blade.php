@@ -13,7 +13,7 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-hover">
+                        <table id="dataTable" class="table table-bordered table-striped table-hover">
                             <thead class="text-center">
                                 <tr>
                                     <th scope="col" width="1%">ID</th>
