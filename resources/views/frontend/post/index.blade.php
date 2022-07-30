@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', "$post->meta_title")
-@section('meta_description', "$post->meta_description")
-@section('meta_keyword', "$post->meta_keyword")
+@section('title', "$category->meta_title")
+@section('meta_description', "$category->meta_description")
+@section('meta_keyword', "$category->meta_keyword")
 @section('content')
     <div class="py-5">
         <div class="container">

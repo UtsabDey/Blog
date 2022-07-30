@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', "$category->meta_title")
-@section('meta_description', "$category->meta_description")
-@section('meta_keyword', "$category->meta_keyword")
+@section('title', "$post->meta_title")
+@section('meta_description', "$post->meta_description")
+@section('meta_keyword', "$post->meta_keyword")
 @section('content')
     <div class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <div class="category-heading">
                         <h4 class="mb-0">{!! $post->name !!}</h4>
                     </div>
@@ -20,9 +20,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="border p-2 my-2">
                         <h4>Advertising Area</h4>
+                    </div>
+                    <div class="border p-2 my-2">
+                        <h4>Advertising Area</h4>
+                    </div>
+                    <div class="border p-2 my-2">
+                        <h4>Advertising Area</h4>
+                    </div>
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h4>Latest Posts</h4>
+                        </div>
+                        <div class="card-body">
+                            @foreach ($latest_post as $item)
+                                <a href="{{ url('tutorial/' . $item->category->slug . '/' . $item->slug) }}" class="text-decoration-none">
+                                    <h6>{{ $item->name }}</h6>
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

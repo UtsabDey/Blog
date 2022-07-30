@@ -36,9 +36,15 @@ class FrontendController extends Controller
 
     public function viewPost(string $category_slug, string $post_slug)
     {
-        $data['category'] = Category::where('slug', $category_slug)->where('status', '0')->first();
+        $data['category'] = Category::where('slug', $category_slug)
+                                    ->where('status', '0')->first();
         if ($data['category']) {
-            $data['post'] = Post::where('category_id', $data['category']->id)->where('slug', $post_slug)->first();
+            $data['post'] = Post::where('category_id', $data['category']->id)
+                                ->where('slug', $post_slug)
+                                ->where('status', '0')->first();
+            $data['latest_post'] = Post::where('category_id', $data['category']->id)
+                                        ->where('status', '0')
+                                        ->orderBy('created_at', 'DESC')->get();
             return view('frontend.post.view',$data);
         }
         else{
