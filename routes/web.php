@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -11,8 +12,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+// Route::get('/home', [HomeController::class, 'index']);
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('tutorial/{slug}', [FrontendController::class, 'viewCategory']);
+Route::get('tutorial/{category_slug}/{post_slug}', [FrontendController::class, 'viewPost']);
 
 Route::group([
     'prefix'     => 'admin',

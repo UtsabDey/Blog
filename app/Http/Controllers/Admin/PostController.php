@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -54,7 +55,7 @@ class PostController extends Controller
         $post = new Post();
         $post->category_id = $request->category_id;
         $post->name = $request->name;
-        $post->slug = $request->slug;
+        $post->slug = Str::slug($request->slug);
         $post->description = $request->description;
         $post->yt_iframe = $request->yt_iframe;
         $post->meta_title = $request->meta_title;
@@ -105,7 +106,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->category_id = $request->category_id;
         $post->name = $request->name;
-        $post->slug = $request->slug;
+        $post->slug = Str::slug($request->slug);
         $post->description = $request->description;
         $post->yt_iframe = $request->yt_iframe;
         $post->meta_title = $request->meta_title;

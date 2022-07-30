@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -45,7 +46,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = $request->slug;
+        $category->slug = Str::slug($request->slug);
         $category->description = $request->description;
         if ($request->hasFile('image')) {
             $photo = $request->file('image');
@@ -100,7 +101,7 @@ class CategoryController extends Controller
 
         $category = Category::find($id);
         $category->name = $request->name;
-        $category->slug = $request->slug;
+        $category->slug = Str::slug($request->slug);
         $category->description = $request->description;
         if ($request->hasFile('image')) {
 
