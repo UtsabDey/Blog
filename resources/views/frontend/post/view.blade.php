@@ -38,7 +38,7 @@
                         <div class="card-body">
                             @foreach ($latest_post as $item)
                                 <a href="{{ url('tutorial/' . $item->category->slug . '/' . $item->slug) }}" class="text-decoration-none">
-                                    <h6>{{ $item->name }}</h6>
+                                    <h6>> {{ $item->name }}</h6>
                                 </a>
                             @endforeach
                         </div>

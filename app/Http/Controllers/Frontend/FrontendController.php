@@ -18,14 +18,18 @@ class FrontendController extends Controller
 
     public function index()
     {
-        return view('frontend.index');
+        $data['category'] = Category::where('status', '0')->get();
+        $data['latest_post'] = Post::where('status', '0')
+                                    ->orderBy('created_at', 'DESC')->get()->take(15);
+        return view('frontend.index', $data);
     }
 
     public function viewCategory(string $slug)
     {
         $data['category'] = Category::where('slug', $slug)->where('status', '0')->first();
         if ($data['category']) {
-            $data['post'] = Post::where('category_id', $data['category']->id)->where('status', '0')->paginate(2);
+            $data['post'] = Post::where('category_id', $data['category']->id)
+                                ->where('status', '0')->paginate(2);
             return view('frontend.post.index',$data);
         }
         else{

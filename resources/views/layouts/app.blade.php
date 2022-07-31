@@ -22,6 +22,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('backend/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/owl.theme.default.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/css/custom.css') }}" rel="stylesheet">
 </head>
 
@@ -29,15 +31,40 @@
     <div id="app">
         @include('layouts.navbar')
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
+
+        @include('layouts.footer')
     </div>
 
     {{-- jQuery --}}
     <script src="{{ asset('backend/js/jquery.min.js') }}"></script>
+
     {{-- Bootstrap JS --}}
     <script src="{{ asset('backend/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ asset('backend/js/owl.carousel.min.js') }}"></script>
+
+    <script>
+        $('.category-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots:false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
