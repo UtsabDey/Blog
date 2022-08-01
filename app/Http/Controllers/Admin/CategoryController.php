@@ -130,12 +130,6 @@ class CategoryController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $category = Category::find($id);
@@ -144,8 +138,9 @@ class CategoryController extends Controller
             if (File::exists($destination)) {
                 File::delete($destination);
             }
+            $category->posts()->delete();
             $category->delete();
-            return redirect()->back()->with('warning', 'Data Delete Success');
+            return redirect()->back()->with('warning', 'Category Deleted with its Posts Successfully');
         }
     }
 }
