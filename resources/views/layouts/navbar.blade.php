@@ -1,18 +1,21 @@
-<div class="global-navbar">
+<div class="global-navbar bg-white">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3 d-none d-sm-none d-md-inline">
                 <img src="{{ asset('') }}" class="w-100" alt="Logo" />
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="border text-center p-2">
                     <h5>Advertise here</h5>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-green">
         <div class="container-fluid">
+            <a href="" class="navbar-brand d-inline d-sm-inline d-md-none">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -38,12 +41,14 @@
                         </ul>
                     </li> --}}
                     @php
-                        $categories = App\Models\Category::where('navbar_status', '0')->where('status', '0')->get();
+                        $categories = App\Models\Category::where('navbar_status', '0')
+                            ->where('status', '0')
+                            ->get();
                     @endphp
                     @foreach ($categories as $category)
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('tutorial', $category->slug) }}">{{ $category->name }}</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('tutorial', $category->slug) }}">{{ $category->name }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div>

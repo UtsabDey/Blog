@@ -83,7 +83,7 @@
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label for="">Status</label>
-                                    <input type="checkbox" name="status">
+                                    <input type="checkbox" name="status" {{ $post->status == '1' ? 'checked' : '' }}>
                                 </div>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary float-end"><i
