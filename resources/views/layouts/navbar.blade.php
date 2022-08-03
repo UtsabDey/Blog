@@ -50,6 +50,15 @@
                             <a class="nav-link" href="{{ url('tutorial', $category->slug) }}">{{ $category->name }}</a>
                         </li>
                     @endforeach
+                    @if (Auth::check())
+                    <li>
+                        <a class="nav-link btn-danger float-end" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </div>
