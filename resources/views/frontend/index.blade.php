@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Blog Site')
-@section('meta_description', 'Blog Site By Utsab Dey')
-@section('meta_keyword', 'Blog Site By Utsab Dey')
+@section('title', "$setting->meta_title")
+@section('meta_description', "$setting->meta_description")
+@section('meta_keyword', "$setting->meta_keyword")
 @section('content')
     <div class="bg-danger py-5">
         <div class="container">

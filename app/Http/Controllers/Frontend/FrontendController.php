@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Setting;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Cast\String_;
@@ -21,6 +22,7 @@ class FrontendController extends Controller
         $data['category'] = Category::where('status', '0')->get();
         $data['latest_post'] = Post::where('status', '0')
                                     ->orderBy('created_at', 'DESC')->get()->take(15);
+        $data['setting'] = Setting::where('id', '1')->first();
         return view('frontend.index', $data);
     }
 

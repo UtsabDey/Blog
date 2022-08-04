@@ -8,6 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @php
+        $setting = App\Models\Setting::find(1)
+    @endphp
+    @if ($setting)
+        <link rel="shortcut icon" href="{{ asset('images/setting/' . $setting->favicon) }}" type="image/x-icon">
+    @endif
+
     <title>@yield('title')</title>
     <meta name="description" content="@yield('meta_description')">
     <meta name="keyword" content="@yield('meta_keyword')">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -27,4 +28,5 @@ Route::group([
     Route::resource('category', CategoryController::class);
     Route::resource('posts', PostController::class);
     Route::resource('users', UserController::class);
+    Route::resource('settings', SettingsController::class);
 });

@@ -2,7 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 d-none d-sm-none d-md-inline">
-                <img src="{{ asset('') }}" class="w-100" alt="Logo" />
+                @php
+                    $setting = App\Models\Setting::find(1);
+                @endphp
+                @if ($setting)
+                    <img src="{{ asset('images/setting/' . $setting->logo) }}" width="100px" height="auto"
+                        alt="Logo" />
+                @endif
             </div>
             <div class="col-md-9">
                 <div class="border text-center p-2">
@@ -11,7 +17,7 @@
             </div>
         </div>
     </div>
-</div>
+</div><br>
 <div class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-green">
         <div class="container-fluid">
@@ -51,13 +57,13 @@
                         </li>
                     @endforeach
                     @if (Auth::check())
-                    <li>
-                        <a class="nav-link btn-danger float-end" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
+                        <li>
+                            <a class="nav-link btn-danger float-end" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
                     @endif
                 </ul>
             </div>

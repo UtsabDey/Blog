@@ -65,24 +65,13 @@ class CategoryController extends Controller
         return redirect()->route('category.index')->with('success', 'Category added successfully');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $data['category'] = Category::find($id);
         return view('admin.category.edit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $validate = Validator::make($request->all(), [
